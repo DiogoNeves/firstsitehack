@@ -179,4 +179,17 @@ div#app-nav-text a {
 	line-height: 1;
 }
 
+div#info-modal {
+	width: 87%;
+	left: 7%;
+}
+
+div.reveal-modal {
+	padding-top: 3em;
+}
+
+a.close-reveal-modal {
+	text-decoration: none;
+}
+
 }
