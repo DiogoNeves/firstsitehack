@@ -18,13 +18,17 @@ body {
 	padding: 0 0 2em 0;
 }
 
+div.container {
+
+}
+
 div#header {
 	margin-top: 5em;
 	margin-bottom: 4em;
 }
 
 h1 {
-	color: ##4E482E;
+	color: #4E482E;
 	text-align: center;
 	font-size: 2.5em;
 }
@@ -33,6 +37,22 @@ h2 {
 	color: rgba(162,150,95,1);
 }
 
+a {
+	color: #4E482E;
+	text-decoration: underline;
+}
+
+a:hover {
+	color: rgba(162,150,95,1);
+}
+
+a.button {
+	background-color: rgba(162,150,95,0.8);
+}
+
+a.button:hover {
+	background-color: rgba(162,150,95,1);
+}
 
 /* -----------------------------------------
    Edit page
@@ -64,4 +84,9 @@ a#done-button {
 
 div.row {
 	margin-bottom: 2em;
+}
+
+a#add-more-button {
+	margin-top: 2em;
+	float: right;
 }
