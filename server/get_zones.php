@@ -12,10 +12,10 @@ if (mysqli_connect_errno()) {
 $query = 'SELECT `id`, `zone`, `text`, `title`, `crop`, `image` FROM `images`;';
 if ($result = $mysqli->query($query)) {
 
-	$zones = null;//array();
+	$zones = array();
 
     while ($image = $result->fetch_object()) {
-    	if (is_null($zones[$image->zone]))
+    	if (!array_key_exists($image->zone, $zones))
     		$zones[$image->zone] = array();
 
     	$title = htmlentities($image->title);
