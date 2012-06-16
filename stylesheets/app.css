@@ -179,6 +179,10 @@ div#app-nav-text a {
 	line-height: 1;
 }
 
+div#app-nav-text a.tag, span.entypo a.tag {
+	color: rgba(97,102,164,1);
+}
+
 div#info-modal {
 	width: 87%;
 	left: 7%;
