@@ -16,6 +16,11 @@
 
 body {
 	padding: 0 0 2em 0;
+	border-top: 6px solid rgba(162,150,95,1);
+}
+
+div.container {
+
 }
 
 div#header {
@@ -23,8 +28,12 @@ div#header {
 	margin-bottom: 4em;
 }
 
+footer {
+	padding: 2em 0;
+}
+
 h1 {
-	color: ##4E482E;
+	color: #4E482E;
 	text-align: center;
 	font-size: 2.5em;
 }
@@ -33,6 +42,26 @@ h2 {
 	color: rgba(162,150,95,1);
 }
 
+a {
+	color: #4E482E;
+	text-decoration: underline;
+	-webkit-transition: all .3s ease-in-out;
+	-moz-transition: all .3s ease-in-out;
+	-o-transition: all .3s ease-in-out;
+	transition: all .3s ease-in-out;
+}
+
+a:hover {
+	color: rgba(162,150,95,1);
+}
+
+a.button {
+	background-color: rgba(97,102,164,1)
+}
+
+a.button:hover {
+	background-color: rgba(162,150,95,1);
+}
 
 /* -----------------------------------------
    Edit page
@@ -64,4 +93,8 @@ a#done-button {
 
 div.row {
 	margin-bottom: 2em;
+}
+
+a#add-more-button {
+	margin-top: 2em;
 }
