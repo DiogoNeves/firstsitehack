@@ -7,7 +7,7 @@ if (is_null($_POST['title'])) {
 	return;
 }
 
-$zone = is_null($_POST['zone']) || strlen($_POST['zone']) == 0 ? 'Zone 1' : $_POST['zone'];
+$zone = is_null($_POST['zone']) || strlen($_POST['zone']) == 0 ? '1' : $_POST['zone'];
 $crop = '0,0,0,0,0,0';
 if (!is_null($_POST['crop']))
 	$crop = join(',', $_POST['crop']);
