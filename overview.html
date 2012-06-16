@@ -218,13 +218,11 @@
 							// TODO: Spinner!
 
 							// Ok, load the image !
-							// var img = $('#' + elementId).attr('src', image.path).load(function() {
-							// 	if (!this.complete || typeof this.naturalWidth == "undefined" || this.naturalWidth == 0) {
-							// 		alert('broken image!');
-							// 	} else {
-							// 		$("#something").append(img);
-							// 	}
-							// });
+							var imageWrapper = function () {
+								var id = elementId;
+								return function (data) { $('#' + id).attr('src', data); };
+							}
+							$.get(image.path, imageWrapper());
 						}
 						++i;
 					}
