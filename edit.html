@@ -102,10 +102,12 @@
 		// Cropping tool
 		//
 
+		var jcrop_api = null;
+
 		//var attachCroppingTool = function (target, preview) {
 		var attachCroppingTool = function (target) {
 			// Create variables (in this scope) to hold the API and image size
-			var jcrop_api, boundx, boundy;
+			var boundx, boundy;
 
 			// function updatePreview(coords)
 			// {
@@ -129,7 +131,7 @@
 			target.Jcrop({
 				//onChange: updatePreview,
 				//onSelect: updatePreview,
-				//aspectRatio: 1
+				aspectRatio: (4/5)
 			}, function(){
 				// Use the API to get the real image size
 				var bounds = this.getBounds();
@@ -205,6 +207,7 @@
 			// $(window).bind('beforeunload', function () {
 			// 	return 'There are some unsaved items!';
 			// });
+			var currentImage = null;
 
 			if (supportsImgDrop) {
 				attachImageDrop($('#edit-target'), function (image) {
@@ -212,11 +215,31 @@
 					//preview.attr('src', image.attr('src'));
 					//attachCroppingTool(image, preview);
 					attachCroppingTool(image);
+					currentImage = image;
 				});
 			}
 			else {
 				console.log('oops, this browser doesn\'t support image drag & drop');
 			}
+
+			// Attach to done button
+			$('#done-button').click(function () {
+				if (jcrop_api != null) {
+					var info = {
+						"title": $('#image-name').val(),
+						"text": $('#image-text').val(),
+						"zone": $('#image-zone').val(),
+						"crop": jcrop_api.tellSelect(),
+						"image": currentImage.attr('src')
+					};
+
+					$.post('server/upload_image.php', info, function(data) {
+						console.log(data);
+					}).error(function (xhr, ajaxOptions, thrownError){
+						console.log(thrownError);
+	                }, 'json');
+				}
+			});
 		});
 	</script>
 
