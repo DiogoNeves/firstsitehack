@@ -15,7 +15,7 @@
 ----------------------------------------- */
 
 body {
-	padding: 0 0 2em 0;
+	padding: 0 0 1em 0;
 	border-top: 6px solid rgba(162,150,95,1);
 }
 
@@ -63,6 +63,21 @@ a.button:hover {
 	background-color: rgba(162,150,95,1);
 }
 
+@font-face {
+  font-family: 'EntypoRegular';
+  src: url("../fonts/entypo-webfont.eot");
+  src: url("../fonts/entypo-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/entypo-webfont.woff") format("woff"), url("../fonts/entypo-webfont.ttf") format("truetype"), url("../fonts/entypo-webfont.svg#EntypoRegular") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+span.entypo a {
+  font-family: 'EntypoRegular';
+  font-size: 4em;
+  text-decoration: none;
+  line-height: 0.75;
+}
+
 /* -----------------------------------------
    Edit page
 ----------------------------------------- */
@@ -91,10 +106,90 @@ a#done-button {
    Overview page
 ----------------------------------------- */
 
-div.row {
+div.zone {
 	margin-bottom: 2em;
 }
 
 a#add-more-button {
 	margin-top: 2em;
+}
+
+/* -----------------------------------------
+   Mobile app styles
+----------------------------------------- */
+
+@media screen and (max-width: 480px) { 
+
+* { 
+-moz-box-sizing: border-box; 
+-webkit-box-sizing: border-box; 
+box-sizing: border-box; 
+}
+
+h1 {
+font-size: 1.2em;
+text-align: right;
+padding: 0.5em 4px 0 0;
+margin-bottom: 0;
+}
+
+div.container {
+	position: relative;
+}
+
+div#logo {
+margin: 2em 0;
+}
+
+div#signup {
+margin: 5em 0 0 0;
+}
+
+div#team-info {
+	margin: 1em 0;
+	text-align: right;
+}
+
+div#back-to-game {
+	padding: 0 4px;
+	margin-bottom: 1em;
+}
+
+div.grid-unit {
+width: 25%;
+float: left;
+padding: 4px;
+}
+
+div#image-info {
+	margin: 0;
+	text-align: right;
+	position: absolute;
+	top: 0.5em;
+	right: 2.5em;
+}
+
+div#app-nav, div#app-nav-text {
+	text-align: center;
+}
+
+div#app-nav-text a {
+	font-size: 0.8em;
+	text-decoration: none;
+	line-height: 1;
+}
+
+div#info-modal {
+	width: 87%;
+	left: 7%;
+}
+
+div.reveal-modal {
+	padding-top: 3em;
+}
+
+a.close-reveal-modal {
+	text-decoration: none;
+}
+
 }
