@@ -191,5 +191,21 @@
 	<script src="javascripts/foundation.js"></script>
 	<script src="javascripts/app.js"></script>
 
+	<script type="text/javascript">
+		var zoneMaxSize = 5;
+
+		$(document).ready(function() {
+			// Get zones info
+			$.getJSON('/server/get_zones.php', function (data) {
+				console.log(data);
+				for (var z in data) {
+					if (z > 0 && z <= zoneMaxSize && data.length <= zoneMaxSize) {
+						
+					}
+				}
+			});
+		});
+	</script>
+
 </body>
 </html>

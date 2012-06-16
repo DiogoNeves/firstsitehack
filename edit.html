@@ -225,10 +225,13 @@
 			// Attach to done button
 			$('#done-button').click(function () {
 				if (jcrop_api != null) {
+					// Remove zone from zone
+					var zone = parseInt($('#image-zone')[0].selectedIndex) + 1;
+
 					var info = {
 						"title": $('#image-name').val(),
 						"text": $('#image-text').val(),
-						"zone": $('#image-zone').val(),
+						"zone": zone,
 						"crop": jcrop_api.tellSelect(),
 						"image": currentImage.attr('src')
 					};
