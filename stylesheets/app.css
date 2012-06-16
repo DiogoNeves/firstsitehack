@@ -91,10 +91,20 @@ a#done-button {
    Overview page
 ----------------------------------------- */
 
-div.row {
+div.zone {
 	margin-bottom: 2em;
 }
 
 a#add-more-button {
 	margin-top: 2em;
+}
+
+/* -----------------------------------------
+   Mobile app styles
+----------------------------------------- */
+
+@media screen and (max-width: 480px) { 
+	div#logo {
+		margin: 2em 0;
+	}
 }
