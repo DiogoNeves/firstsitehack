@@ -104,10 +104,42 @@ a#add-more-button {
 ----------------------------------------- */
 
 @media screen and (max-width: 480px) { 
-	div#logo {
-		margin: 2em 0;
-	}
-	div#signup {
-		margin: 5em 0 0 0;
-	}
+
+* { 
+-moz-box-sizing: border-box; 
+-webkit-box-sizing: border-box; 
+box-sizing: border-box; 
+}
+
+h1 {
+font-size: 1.2em;
+text-align: right;
+padding: 0.5em 4px 0 0;
+margin-bottom: 0;
+}
+
+div#logo {
+margin: 2em 0;
+}
+
+div#signup {
+margin: 5em 0 0 0;
+}
+
+div#team-info {
+	margin: 1em 0;
+	text-align: right;
+}
+
+div#back-to-game {
+	padding: 0 4px;
+	margin-bottom: 1em;
+}
+
+div.grid-unit {
+width: 25%;
+float: left;
+padding: 4px;
+}
+
 }
