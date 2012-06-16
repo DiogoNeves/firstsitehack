@@ -19,15 +19,14 @@ if (mysqli_connect_errno()) {
     exit();
 }
 
-$image = substr($mysqli->real_escape_string($_POST['image']), 0, 10);
+//$image = substr($mysqli->real_escape_string($_POST['image']), 0, 10);
+$image = $mysqli->real_escape_string($_POST['image']);
 
 $query = 'INSERT INTO images (title, text, zone, crop, image) VALUES ("' . $_POST['title'] . '", "' . $_POST['text'] . '", "' . $zone . '", "' . $crop . '", "' . $image . '")';
-//echo json_encode($query);
 $mysqli->query($query);
 
 $mysqli->close();
 
 echo json_encode('OK');
-//echo json_encode($_POST);
 
 ?>
