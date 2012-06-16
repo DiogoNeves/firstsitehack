@@ -22,7 +22,7 @@ if ($result = $mysqli->query($query)) {
     	$text = htmlentities($image->text);
     	$crop = explode(',', $image->crop);
 
-    	$zones[$image->zone][] = array("title" => $title, "text" => $text, "crop" => $crop, "image" => "/server/image.php?id=" . $image->id);
+    	$zones[$image->zone][] = array("title" => $title, "text" => $text, "crop" => $crop, "path" => "/server/image.php?id=" . $image->id);
     }
 
     /* free result set */
