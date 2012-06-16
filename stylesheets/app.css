@@ -16,6 +16,7 @@
 
 body {
 	padding: 0 0 2em 0;
+	border-top: 6px solid rgba(162,150,95,1);
 }
 
 div.container {
@@ -25,6 +26,10 @@ div.container {
 div#header {
 	margin-top: 5em;
 	margin-bottom: 4em;
+}
+
+footer {
+	padding: 2em 0;
 }
 
 h1 {
@@ -40,6 +45,10 @@ h2 {
 a {
 	color: #4E482E;
 	text-decoration: underline;
+	-webkit-transition: all .3s ease-in-out;
+	-moz-transition: all .3s ease-in-out;
+	-o-transition: all .3s ease-in-out;
+	transition: all .3s ease-in-out;
 }
 
 a:hover {
@@ -47,7 +56,7 @@ a:hover {
 }
 
 a.button {
-	background-color: rgba(162,150,95,0.8);
+	background-color: rgba(97,102,164,1)
 }
 
 a.button:hover {
@@ -88,5 +97,4 @@ div.row {
 
 a#add-more-button {
 	margin-top: 2em;
-	float: right;
 }
