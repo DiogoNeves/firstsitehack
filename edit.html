@@ -44,15 +44,15 @@
 
 		<div class="row">
 			<div class="seven columns">
-				<div id="edit-target" class="image-crop">
+				<div id="edit-target" class="image-crop" style="width: 553px; height: 558px">
 					<img src="http://placehold.it/1000x1000">
 				</div>
 			</div>
 				<div class="five columns">
 					<div class="row">
 					<div class="eight columns">
-						<div class="image-preview">
-						<img src="http://placehold.it/1000x1000">
+						<div class="image-preview" style="width: 249px; height: 254px; overflow: hidden">
+						<img id="preview-target" src="http://placehold.it/1000x1000">
 						</div>
 					</div>
 				</div>
@@ -93,15 +93,34 @@
 		// Cropping tool
 		//
 
+		//var attachCroppingTool = function (target, preview) {
 		var attachCroppingTool = function (target) {
 			// Create variables (in this scope) to hold the API and image size
 			var jcrop_api, boundx, boundy;
+
+			// function updatePreview(coords)
+			// {
+			// 	if (parseInt(coords.w) > 0)
+			// 	{
+			// 		var ratiox = coords.w / boundx;
+			// 		var rx = 249 / (boundx / coords.w);
+			// 		var ry = 554 / (boundy / coords.h);
+
+			// 		console.log(rx + ', ' + ry);
+
+			// 		preview.css({
+			// 			width: Math.round(rx * boundx) + 'px',
+			// 			height: Math.round(ry * boundy) + 'px',
+			// 			marginLeft: '-' + Math.round(rx * coords.x) + 'px',
+			// 			marginTop: '-' + Math.round(ry * coords.y) + 'px'
+			// 		});
+			// 	}
+			// };
 
 			target.Jcrop({
 				//onChange: updatePreview,
 				//onSelect: updatePreview,
 				//aspectRatio: 1
-				
 			}, function(){
 				// Use the API to get the real image size
 				var bounds = this.getBounds();
@@ -121,7 +140,7 @@
 		var supportsImgDrop = (typeof window.FileReader !== 'undefined');
 
 		// Enable file dropping (also adds the style)
-		var attachImageDrop = function (target) {
+		var attachImageDrop = function (target, dropCallback) {
 			target.bind({
 				dragover : function () {
 					target.addClass('hover');
@@ -154,13 +173,14 @@
 						var imgObj = jQuery('<img>', {
 							id: 'image-crop-content',
 							src: loadEvent.target.result,
+							alt: "image_cropping",
 							draggable: false
 						});
 
 						imgObj[0].target = target;
 
 						target.append(imgObj);
-						attachCroppingTool(imgObj);
+						dropCallback(imgObj);
 					};
 
 					console.log(file);
@@ -178,7 +198,12 @@
 			// });
 
 			if (supportsImgDrop) {
-				attachImageDrop($('#edit-target'));
+				attachImageDrop($('#edit-target'), function (image) {
+					//var preview = $('#preview-target');
+					//preview.attr('src', image.attr('src'));
+					//attachCroppingTool(image, preview);
+					attachCroppingTool(image);
+				});
 			}
 			else {
 				console.log('oops, this browser doesn\'t support image drag & drop');
