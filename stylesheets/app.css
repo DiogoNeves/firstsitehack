@@ -107,4 +107,7 @@ a#add-more-button {
 	div#logo {
 		margin: 2em 0;
 	}
+	div#signup {
+		margin: 5em 0 0 0;
+	}
 }
