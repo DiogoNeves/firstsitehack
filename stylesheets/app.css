@@ -5,7 +5,7 @@
    Table of Contents
 -----------------------------------------------------
 :: Shared Styles
-:: Page Name 1
+:: Image drag and drop
 :: Page Name 2
 */
 
@@ -14,12 +14,32 @@
    Shared Styles
 ----------------------------------------- */
 
+div#header {
+	margin-top: 4em;
+}
+
+h1 {
+	color: ##4E482E;
+	text-align: center;
+	font-size: 2.5em;
+}
+
+h2 {
+	color: rgba(162,150,95,1);
+}
 
 
 /* -----------------------------------------
-   Page Name 1
+   Image drag and drop
 ----------------------------------------- */
 
+div.image-drop {
+margin-top: 4em;
+	background-color: rgba(162,150,95,0.2);
+	height: 12em;
+	text-align: center;
+	padding-top: 9em;
+}
 
 
 
