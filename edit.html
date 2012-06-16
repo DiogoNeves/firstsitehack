@@ -16,6 +16,7 @@
 	<!-- Included CSS Files -->
 	<link rel="stylesheet" href="stylesheets/foundation.css">
 	<link rel="stylesheet" href="stylesheets/app.css">
+	<link rel="stylesheet" href="stylesheets/jquery.Jcrop.css" type="text/css" />
 
 	<!--[if lt IE 9]>
 		<link rel="stylesheet" href="stylesheets/ie.css">
@@ -48,7 +49,7 @@
 
 		<div class="row">
 			<div class="seven columns">
-				<div class="image-preview">
+				<div id="edit-target" class="image-crop">
 					<img src="http://placehold.it/1000x1000">
 				</div>
 			</div>
@@ -92,6 +93,107 @@
 	<script src="javascripts/jquery.min.js"></script>
 	<script src="javascripts/foundation.js"></script>
 	<script src="javascripts/app.js"></script>
+	<script src="javascripts/jquery.Jcrop.min.js"></script>
+
+	<!-- Edit tool code -->
+	<script type="text/javascript">
+
+		//
+		// Cropping tool
+		//
+
+		var attachCroppingTool = function (target) {
+			// Create variables (in this scope) to hold the API and image size
+			var jcrop_api, boundx, boundy;
+
+			target.Jcrop({
+				//onChange: updatePreview,
+				//onSelect: updatePreview,
+				//aspectRatio: 1
+				
+			}, function(){
+				// Use the API to get the real image size
+				var bounds = this.getBounds();
+				boundx = bounds[0];
+				boundy = bounds[1];
+
+				// Store the API in the jcrop_api variable
+				jcrop_api = this;
+			});
+		};
+
+		//
+		// Drag & Drop
+		//
+
+		// Detect the FileReader used by the image drop
+		var supportsImgDrop = (typeof window.FileReader !== 'undefined');
+
+		// Enable file dropping (also adds the style)
+		var attachImageDrop = function (target) {
+			target.bind({
+				dragover : function () {
+					target.addClass('hover');
+					return false;
+				},
+
+				dragend : function () {
+					target.removeClass('hover');
+					return false;
+				},
+
+				drop : function (dropEvent) {
+					dropEvent.preventDefault();
+
+					// Fixup event references
+					var e = dropEvent.originalEvent || dropEvent;
+					var files = e.files || e.dataTransfer.files;
+
+					// Prevent dragging from itself
+					if (target === e.target)
+
+					target.removeClass('hover');
+					target.empty();
+
+					// Read image
+					var file = files[0];
+					var reader = new FileReader();
+
+					reader.onload = function (loadEvent) {
+						var imgObj = jQuery('<img>', {
+							id: 'image-crop-content',
+							src: loadEvent.target.result,
+							draggable: false
+						});
+
+						imgObj[0].target = target;
+
+						target.append(imgObj);
+						attachCroppingTool(imgObj);
+					};
+
+					console.log(file);
+					reader.readAsDataURL(file);
+
+					return false;
+				}
+			});
+		};
+
+		$(document).ready(function() {
+			// TODO: Warn of unsaved changes
+			// $(window).bind('beforeunload', function () {
+			// 	return 'There are some unsaved items!';
+			// });
+
+			if (supportsImgDrop) {
+				attachImageDrop($('#edit-target'));
+			}
+			else {
+				console.log('oops, this browser doesn\'t support image drag & drop');
+			}
+		});
+	</script>
 
 </body>
 </html>
