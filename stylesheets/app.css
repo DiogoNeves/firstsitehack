@@ -14,6 +14,10 @@
    Shared Styles
 ----------------------------------------- */
 
+body {
+	padding: 0 0 2em 0;
+}
+
 div#header {
 	margin-top: 5em;
 	margin-bottom: 4em;
@@ -31,7 +35,7 @@ h2 {
 
 
 /* -----------------------------------------
-   Image drag and drop
+   Edit page
 ----------------------------------------- */
 
 div.image-drop {
@@ -45,12 +49,12 @@ margin-top: 4em;
 	border-radius: 2em;
 }
 
-
-
-/* -----------------------------------------
-   Edit page
------------------------------------------ */
+div.image-preview {
+	margin-bottom: 3em;
+}
 
 a#done-button {
 	margin-top: 2em;
 }
+
+
