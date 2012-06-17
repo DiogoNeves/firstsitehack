@@ -1,5 +1,8 @@
 <?php
 
+require 'globals.php';
+require 'imagecrop.php';
+
 header("Content-type:application/json;charset=UTF-8");
 
 if (is_null($_POST['title'])) {
@@ -12,7 +15,7 @@ $crop = '0,0,0,0,0,0';
 if (!is_null($_POST['crop']))
 	$crop = join(',', $_POST['crop']);
 
-$mysqli = new mysqli('localhost', 'root', 'root', 'goldrush');
+$mysqli = new mysqli($host, $user, $pass, $database);
 /* check connection */
 if (mysqli_connect_errno()) {
     printf("Connect failed: %s\n", mysqli_connect_error());
@@ -23,7 +26,19 @@ if (mysqli_connect_errno()) {
 $image = $mysqli->real_escape_string($_POST['image']);
 
 $query = 'INSERT INTO images (title, text, zone, crop, image) VALUES ("' . $_POST['title'] . '", "' . $_POST['text'] . '", "' . $zone . '", "' . $crop . '", "' . $image . '")';
-$mysqli->query($query);
+if ($mysqli->query($query)) {
+	//error_log(substr($image, 0, 40));
+	$clean = str_replace('data:image/jpeg;base64,', '', $image);
+	$clean = str_replace(' ', '+', $clean);
+	$decoded = base64_decode($clean);
+	$binimage = imagecreatefromstring($decoded);
+
+	if ( !file_exists('crops/') ) {
+		mkdir ('crops/', 0777);
+	}
+	cropImage($binimage, $crop, 'crops/' . $_POST['title'] . '.jpg');
+	imagedestroy($binimage);
+}
 
 $mysqli->close();
 

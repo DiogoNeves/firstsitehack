@@ -218,11 +218,12 @@
 							// TODO: Spinner!
 
 							// Ok, load the image !
-							var imageWrapper = function () {
-								var id = elementId;
-								return function (data) { $('#' + id).attr('src', data); };
-							}
-							$.get(image.path, imageWrapper());
+							// var imageWrapper = function () {
+							// 	var id = elementId;
+							// 	return function (data) { $('#' + id).attr('src', data); };
+							// }
+							// $.get(image.path, imageWrapper());
+							$('#' + elementId).attr('src', image.path);
 						}
 						++i;
 					}

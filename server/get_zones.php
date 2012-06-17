@@ -1,8 +1,10 @@
 <?php
 
+require 'globals.php';
+
 header("Content-type:application/json;charset=UTF-8");
 
-$mysqli = new mysqli('localhost', 'root', 'root', 'goldrush');
+$mysqli = new mysqli($host, $user, $pass, $database);
 /* check connection */
 if (mysqli_connect_errno()) {
     printf("Connect failed: %s\n", mysqli_connect_error());
@@ -22,7 +24,7 @@ if ($result = $mysqli->query($query)) {
     	$text = htmlentities($image->text);
     	$crop = explode(',', $image->crop);
 
-    	$zones[$image->zone][] = array("title" => $title, "text" => $text, "crop" => $crop, "path" => "/server/image.php?id=" . $image->id);
+    	$zones[$image->zone][] = array("title" => $title, "text" => $text, "crop" => $crop, "path" => getImagePath($image->id, $image->title));
     }
 
     /* free result set */
