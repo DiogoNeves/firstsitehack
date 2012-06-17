@@ -1,5 +1,7 @@
 <?php
 
+require 'globals.php';
+
 header("Content-type:application/json;charset=UTF-8");
 
 if (is_null($_POST['title'])) {
@@ -12,7 +14,7 @@ $crop = '0,0,0,0,0,0';
 if (!is_null($_POST['crop']))
 	$crop = join(',', $_POST['crop']);
 
-$mysqli = new mysqli('localhost', 'root', 'root', 'goldrush');
+$mysqli = new mysqli($host, $user, $pass, $database);
 /* check connection */
 if (mysqli_connect_errno()) {
     printf("Connect failed: %s\n", mysqli_connect_error());
