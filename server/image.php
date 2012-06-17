@@ -11,7 +11,7 @@ if (mysqli_connect_errno()) {
     exit();
 }
 
-$query = 'SELECT `id`, `image` FROM `images` WHERE `id` = "' . $_GET['id'] . '";';
+$query = 'SELECT `id`, `title`, `image` FROM `images` WHERE `id` = "' . $_GET['id'] . '";';
 if ($result = $mysqli->query($query)) {
 
 	$zones = array();

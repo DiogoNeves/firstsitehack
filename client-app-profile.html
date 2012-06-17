@@ -84,9 +84,10 @@
 					console.log('adding unlocked image ' + image);
 
 					// Ok, load the image !
-					$.get(image, function (data) {
-						$('#profile-grid').append('<div class="grid-unit"><a href="#"><img src="' + data + '"></a></div>');
-					});
+					// $.get(image, function (data) {
+					// 	$('#profile-grid').append('<div class="grid-unit"><a href="#"><img src="' + data + '"></a></div>');
+					// });
+					$('#profile-grid').append('<div class="grid-unit"><a href="#"><img src="' + image + '"></a></div>');
 				}
 			});
 		});

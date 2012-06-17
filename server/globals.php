@@ -6,8 +6,8 @@ $pass = 'root';
 $database = 'goldrush';
 
 
-function getImagePath($id) {
-	return "/server/image.php?id=" . $id;
+function getImagePath($id, $title) {
+	return "/server/crops/" . $title . '.jpg';
 }
 
 ?>

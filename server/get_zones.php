@@ -24,7 +24,7 @@ if ($result = $mysqli->query($query)) {
     	$text = htmlentities($image->text);
     	$crop = explode(',', $image->crop);
 
-    	$zones[$image->zone][] = array("title" => $title, "text" => $text, "crop" => $crop, "path" => getImagePath($image->id));
+    	$zones[$image->zone][] = array("title" => $title, "text" => $text, "crop" => $crop, "path" => getImagePath($image->id, $image->title));
     }
 
     /* free result set */
