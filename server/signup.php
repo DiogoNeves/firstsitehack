@@ -4,10 +4,15 @@ require 'globals.php';
 
 header("Content-type:application/json;charset=UTF-8");
 
+if (!array_key_exists('teamname', $_POST)) {
+	echo json_encode('NO_TEAM');
+	exit();
+}
+
 $teamname = $_POST['teamname'];
 if (is_null($teamname) || strlen($teamname) == 0) {
 	echo json_encode('NO_TEAM');
-	return;
+	exit();
 }
 
 $mysqli = new mysqli($host, $user, $pass, $database);
