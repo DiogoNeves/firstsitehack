@@ -54,5 +54,24 @@
 	<script src="javascripts/foundation.js"></script>
 	<script src="javascripts/app.js"></script>
 
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('#done-button').click(function () {
+				var teamName = $('#team-name').val();
+				if (teamName != null && teamName !== undefined && teamName.length > 0 && teamName.length < 25) {
+					var info = {
+						"teamname": teamName
+					};
+
+					$.post('server/signup.php', info, function(data) {
+						console.log(data);
+					}).error(function (xhr, ajaxOptions, thrownError){
+						console.log(thrownError);
+	                }, 'json');
+				}
+			});
+		});
+	</script>
+
 </body>
 </html>
