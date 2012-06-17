@@ -40,7 +40,7 @@
 			</div>
 			<div class="phone-three three columns">
 				<h1 class="white-shadow">Team Name here</h1>
-				<span id="score" class="white-shadow">Current score: <strong class="gold round label">11</strong></span>
+				<span id="score" class="white-shadow">Current score: <strong id="score-target" class="gold round label">11</strong></span>
 			</div>
 		</div>
 	<div class="row">
@@ -50,90 +50,11 @@
 	</div>
 
 		<div id="profile-grid" class="row">
+			<!-- Template for unlocked images
 			<div class="grid-unit">
 				<a href="#"><img src="http://placehold.it/1000x1000"></a>
 			</div>
-			<div class="grid-unit">
-				<a href="#"><img src="http://placehold.it/1000x1000"></a>
-			</div>
-			<div class="grid-unit">
-				<a href="#"><img src="http://placehold.it/1000x1000"></a>
-			</div>
-			<div class="grid-unit">
-				<a href="#"><img src="http://placehold.it/1000x1000"></a>
-			</div>
-			<div class="grid-unit">
-				<a href="#"><img src="http://placehold.it/1000x1000"></a>
-			</div>
-			<div class="grid-unit">
-				<a href="#"><img src="http://placehold.it/1000x1000"></a>
-			</div>
-			<div class="grid-unit">
-				<a href="#"><img src="http://placehold.it/1000x1000"></a>
-			</div>
-			<div class="grid-unit">
-				<a href="#"><img src="http://placehold.it/1000x1000"></a>
-			</div>
-			<div class="grid-unit">
-				<a href="#"><img src="http://placehold.it/1000x1000"></a>
-			</div>
-			<div class="grid-unit">
-				<a href="#"><img src="http://placehold.it/1000x1000"></a>
-			</div>
-			<div class="grid-unit">
-				<a href="#"><img src="http://placehold.it/1000x1000"></a>
-			</div>
-			<div class="grid-unit">
-				<a href="#"><img src="http://placehold.it/1000x1000"></a>
-			</div>
-			<div class="grid-unit">
-				<a href="#"><img src="http://placehold.it/1000x1000"></a>
-			</div>
-			<div class="grid-unit">
-				<a href="#"><img src="http://placehold.it/1000x1000"></a>
-			</div>
-			<div class="grid-unit">
-				<a href="#"><img src="http://placehold.it/1000x1000"></a>
-			</div>
-			<div class="grid-unit">
-				<a href="#"><img src="http://placehold.it/1000x1000"></a>
-			</div>
-			<div class="grid-unit">
-				<a href="#"><img src="http://placehold.it/1000x1000"></a>
-			</div>
-			<div class="grid-unit">
-				<a href="#"><img src="http://placehold.it/1000x1000"></a>
-			</div>
-			<div class="grid-unit">
-				<a href="#"><img src="http://placehold.it/1000x1000"></a>
-			</div>
-			<div class="grid-unit">
-				<a href="#"><img src="http://placehold.it/1000x1000"></a>
-			</div>
-			<div class="grid-unit">
-				<a href="#"><img src="http://placehold.it/1000x1000"></a>
-			</div>
-			<div class="grid-unit">
-				<a href="#"><img src="http://placehold.it/1000x1000"></a>
-			</div>
-			<div class="grid-unit">
-				<a href="#"><img src="http://placehold.it/1000x1000"></a>
-			</div>
-			<div class="grid-unit">
-				<a href="#"><img src="http://placehold.it/1000x1000"></a>
-			</div>
-			<div class="grid-unit">
-				<a href="#"><img src="http://placehold.it/1000x1000"></a>
-			</div>
-			<div class="grid-unit">
-				<a href="#"><img src="http://placehold.it/1000x1000"></a>
-			</div>
-			<div class="grid-unit">
-				<a href="#"><img src="http://placehold.it/1000x1000"></a>
-			</div>
-			<div class="grid-unit">
-				<a href="#"><img src="http://placehold.it/1000x1000"></a>
-			</div>
+			-->
 		</div>
 
 		
@@ -147,6 +68,30 @@
 	<script src="javascripts/jquery.min.js"></script>
 	<script src="javascripts/foundation.js"></script>
 	<script src="javascripts/app.js"></script>
+
+	<script type="text/javascript">
+		// TODO: Later use PersistJS or something
+		var teamname = 'test';
+
+		$(document).ready(function() {
+			$.getJSON('server/profile.php?teamname=' + teamname, function (data) {
+				console.log(data);
+				$('#score-target').text(data.score);
+
+				for (i in data.images) {
+					var image = data.images[i];
+					
+					console.log('adding unlocked image ' + image);
+
+					// Ok, load the image !
+					// $.get(image, function (data) {
+					// 	$('#profile-grid').append('<div class="grid-unit"><a href="#"><img src="' + data + '"></a></div>');
+					// });
+					$('#profile-grid').append('<div class="grid-unit"><a href="#"><img src="' + image + '"></a></div>');
+				}
+			});
+		});
+	</script>
 
 </body>
 </html>
