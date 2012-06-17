@@ -84,10 +84,6 @@
 					console.log('adding unlocked image ' + image);
 
 					// Ok, load the image !
-					var imageWrapper = function () {
-						var id = elementId;
-						return function (data) { $('#' + id).attr('src', data); };
-					}
 					$.get(image, function (data) {
 						$('#profile-grid').append('<div class="grid-unit"><a href="#"><img src="' + data + '"></a></div>');
 					});

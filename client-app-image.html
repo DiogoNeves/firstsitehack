@@ -45,22 +45,23 @@
      <a class="close-reveal-modal">&#215;</a>
 		</div>
 	
+		<!-- TODO: Fix size and set hidden overflow -->
 		<div class="row">
-			<img src="http://placehold.it/550x500">
+			<img id="image-target" src="http://placehold.it/550x500">
 		</div>
 
 		<div id="app-nav" class="row">
 			<span class="phone-one columns entypo"><a href="#">,</a></span>
-			<span class="phone-one columns entypo"><a href="#">ë</a></span>
-			<span class="phone-one columns entypo"><a href="#">î</a></span>
-			<span class="phone-one columns entypo"><a href="#" class="tag">C</a></span>
+			<span class="phone-one columns entypo"><a class="back-button" href="#">ë</a></span>
+			<span class="phone-one columns entypo"><a class="next-button" href="#">î</a></span>
+			<span class="phone-one columns entypo"><a class="tag-button" href="#" class="tag">C</a></span>
 		</div>
 		
 		<div id="app-nav-text" class="row">
 			<span class="phone-one columns"><a href="#">My Team</a></span>
-			<span class="phone-one columns"><a href="#">Back</a></span>
-			<span class="phone-one columns"><a href="#">Next</a></span>
-			<span class="phone-one columns"><a href="#" class="tag">Tag it!</a></span>
+			<span class="phone-one columns"><a class="back-button" href="#">Back</a></span>
+			<span class="phone-one columns"><a class="next-button" href="#">Next</a></span>
+			<span class="phone-one columns"><a class="tag-button" href="#" class="tag">Tag it!</a></span>
 		</div>
 		
 	</div><!-- container -->
@@ -72,6 +73,72 @@
 	<script src="javascripts/jquery.min.js"></script>
 	<script src="javascripts/foundation.js"></script>
 	<script src="javascripts/app.js"></script>
+
+	<script type="text/javascript">
+		// TODO: Maybe get the game history from the server without having to always get next
+		// TODO: Later use PersistJS or something
+		var teamname = 'test';
+		var zoneCount = 6;
+		var currentZone = 0;
+		var currentIndex = 0;
+		var history = [];
+
+		var setImage = function (imageData) {
+				currentZone = parseInt(imageData.zone);
+
+				// Ok, set the text
+				$('#info-modal p').text(imageData.text);
+
+				// Ok, load the image !
+				$.get(imageData.path, function (img) {
+					$('#image-target').attr('src', img);
+				});
+		};
+
+		var getNextImageFromServer = function () {
+			var zoneRequest = currentZone == 0 ? '' : '&zone=' + (currentZone + 1);
+
+			$.getJSON('server/nextimage.php?teamname=' + teamname + zoneRequest, function (data) {
+				console.log(data);
+				console.log('next image ' + data.path);
+
+				// so we can go back
+				currentIndex = history.push(data) - 1;
+				
+				setImage(data);
+			});
+		};
+
+		$(document).ready(function() {
+			getNextImageFromServer();
+
+			$('.back-button').click(function(e) {
+				e.preventDefault();
+
+				if (currentIndex > 0)
+					setImage(history[--currentIndex]);
+
+				console.log('back to ' + currentZone);
+			});
+
+			$('.next-button').click(function(e) {
+				e.preventDefault();
+
+				if (currentIndex < (history.length - 1))
+					setImage(history[++currentIndex]);
+				else if (currentZone < zoneCount)
+					getNextImageFromServer();
+
+				console.log('skipped to ' + currentZone);
+			});
+
+			$('.tag-button').click(function(e) {
+				e.preventDefault();
+
+				console.log('unlocked to ' + currentZone);
+			});
+		});
+	</script>
 
 </body>
 </html>
