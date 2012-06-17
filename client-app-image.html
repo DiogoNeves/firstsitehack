@@ -80,7 +80,7 @@
 		var teamname = 'test';
 		var zoneCount = 6;
 		var currentZone = 0;
-		var currentIndex = 0;
+		var currentIndex = -1;
 		var history = [];
 
 		var setImage = function (imageData) {
@@ -99,6 +99,8 @@
 			var zoneRequest = currentZone == 0 ? '' : '&zone=' + (currentZone + 1);
 
 			$.getJSON('server/nextimage.php?teamname=' + teamname + zoneRequest, function (data) {
+				if (data == 'done') return;
+
 				console.log(data);
 				console.log('next image ' + data.path);
 
@@ -109,33 +111,53 @@
 			});
 		};
 
+		var navigateBack = function () {
+			if (currentIndex > 0)
+				setImage(history[--currentIndex]);
+		};
+
+		var navigateNext = function () {
+			if (currentIndex < (history.length - 1))
+				setImage(history[++currentIndex]);
+			else if (currentZone < zoneCount)
+				getNextImageFromServer();
+		};
+
 		$(document).ready(function() {
 			getNextImageFromServer();
 
 			$('.back-button').click(function(e) {
 				e.preventDefault();
 
-				if (currentIndex > 0)
-					setImage(history[--currentIndex]);
-
+				navigateBack();
 				console.log('back to ' + currentZone);
 			});
 
 			$('.next-button').click(function(e) {
 				e.preventDefault();
 
-				if (currentIndex < (history.length - 1))
-					setImage(history[++currentIndex]);
-				else if (currentZone < zoneCount)
-					getNextImageFromServer();
-
+				navigateNext();
 				console.log('skipped to ' + currentZone);
 			});
 
 			$('.tag-button').click(function(e) {
 				e.preventDefault();
 
-				console.log('unlocked to ' + currentZone);
+				if (currentIndex >= 0) {
+					console.log('unlocked to ' + currentZone);
+
+					var info = {
+						"teamname": teamname,
+						"id": history[currentIndex].id
+					};
+
+					$.post('server/unlock.php', info, function(data) {
+						console.log(data);
+						navigateNext();
+					}).error(function (xhr, ajaxOptions, thrownError){
+						console.log(thrownError);
+	                }, 'json');
+				}
 			});
 		});
 	</script>
