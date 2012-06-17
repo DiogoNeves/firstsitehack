@@ -22,14 +22,15 @@ if (mysqli_connect_errno()) {
     exit();
 }
 
-$query = "SELECT `image_id`, `score_earned` FROM `unlocked_images` WHERE `team_name` = \"{$teamname}\"";
+$query = "SELECT `title`, `image_id`, `score_earned` FROM `unlocked_images`, `images` WHERE `team_name` = \"{$teamname}\" AND `image_id` = `id`";
 if ($result = $mysqli->query($query)) {
 
     $score = 0;
 	$images = array();
 
     while ($img = $result->fetch_object()) {
-        $images[] = htmlentities(getImagePath($img->image_id));
+        error_log('Title: ' . $img->title);
+        $images[] = htmlentities(getImagePath($img->image_id, $img->title));
         $score += $img->score_earned;
     }
 

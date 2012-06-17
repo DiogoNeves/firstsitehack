@@ -90,9 +90,10 @@
 				$('#info-modal p').text(imageData.text);
 
 				// Ok, load the image !
-				$.get(imageData.path, function (img) {
-					$('#image-target').attr('src', img);
-				});
+				// $.get(imageData.path, function (img) {
+				// 	$('#image-target').attr('src', img);
+				// });
+				$('#image-target').attr('src', imageData.path);
 		};
 
 		var getNextImageFromServer = function () {
