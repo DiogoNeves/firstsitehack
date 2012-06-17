@@ -134,8 +134,16 @@ text-align: center;
 
 a#done-button.gold {
 	width: 100%;
-	background-color: rgba(162,150,95,0.6);
+	background-color: rgba(255,255,255,0.1);
 	border: 1px solid rgba(162,150,95,1);
+}
+
+.gold.label {
+	background-color: rgba(255,255,255,0.1);
+}
+
+.white-shadow {
+	text-shadow: 0px 1px 0px rgba(255,255,255,0.3);
 }
 
 body#splash, body#sign-up {
@@ -149,7 +157,6 @@ body#splash a#done-button.gold {
 	position: absolute;
 	top: 13em;
 	width: 87%;
-	background-color: rgba(162,150,95,0.6);
 	border: 1px solid rgba(162,150,95,1);
 }
 
@@ -159,6 +166,21 @@ padding: 10em 0 0 0;
 
 body#sign-up a#done-button.gold {
 margin-top: 0;
+}
+
+body#team-profile  {
+background-image: url("../images/mobile-plain-no-logo.png");
+background-repeat: repeat;
+position: relative;
+border: 0;
+}
+
+body#team-profile a#done-button.gold {
+margin-top: 0;
+}
+
+span#score {
+	color: #4E482E;
 }
 
 h1 {
