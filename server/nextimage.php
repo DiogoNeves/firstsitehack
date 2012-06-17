@@ -29,19 +29,23 @@ if (mysqli_connect_errno()) {
     exit();
 }
 
-$query = "SELECT `id`, `text`, `zone` FROM `images` WHERE (SELECT MIN(`zone`) AS zone FROM `images` WHERE IFNULL((SELECT MAX(`zone`) AS zone FROM `unlocked_images`, `images` WHERE `team_name` = \"{$teamname}\" AND `image_id` = `id`), 1) < `zone`) = `zone`";
+$query = "SELECT `id`, `text`, `zone`, `crop` FROM `images` WHERE ";
+$query .= "(SELECT MIN(`zone`) AS zone FROM `images` WHERE IFNULL((SELECT MAX(`zone`) AS zone FROM `unlocked_images`, `images` WHERE `team_name` = \"{$teamname}\" AND `image_id` = `id`), 0) < `zone`) = `zone`";
 if ($zone > 0)
-	$query = "SELECT `id`, `text`, `zone` FROM `images` WHERE (SELECT MIN(`zone`) AS zone FROM `images` WHERE `zone` >= \"{$zone}\") = `zone`";
+	$query .= "(SELECT MIN(`zone`) AS zone FROM `images` WHERE `zone` >= \"{$zone}\") = `zone`";
 
 $query .= " ORDER BY RAND() LIMIT 0,1;";
 
 if ($result = $mysqli->query($query)) {
 
     $img = $result->fetch_object();
-    if ($img)
-    	echo json_encode(array("id" => $img->id, "text" => $img->text, "zone" => $img->zone, "path" => htmlentities(getImagePath($img->id))));
-    else
+    if ($img) {
+    	$crop = explode(',', $img->crop);
+    	echo json_encode(array("id" => $img->id, "text" => $img->text, "zone" => $img->zone, "crop" => $crop, "path" => htmlentities(getImagePath($img->id))));
+    }
+    else {
     	echo json_encode('done');
+    }
 
     /* free result set */
     $result->close();
