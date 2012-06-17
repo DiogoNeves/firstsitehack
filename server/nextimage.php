@@ -30,11 +30,13 @@ if (mysqli_connect_errno()) {
 }
 
 $query = "SELECT `id`, `title`, `text`, `zone`, `crop` FROM `images` WHERE ";
-$query .= "(SELECT MIN(`zone`) AS zone FROM `images` WHERE IFNULL((SELECT MAX(`zone`) AS zone FROM `unlocked_images`, `images` WHERE `team_name` = \"{$teamname}\" AND `image_id` = `id`), 0) < `zone`) = `zone`";
 if ($zone > 0)
 	$query .= "(SELECT MIN(`zone`) AS zone FROM `images` WHERE `zone` >= \"{$zone}\") = `zone`";
+else
+    $query .= "(SELECT MIN(`zone`) AS zone FROM `images` WHERE IFNULL((SELECT MAX(`zone`) AS zone FROM `unlocked_images`, `images` WHERE `team_name` = \"{$teamname}\" AND `image_id` = `id`), 0) < `zone`) = `zone`";
 
 $query .= " ORDER BY RAND() LIMIT 0,1;";
+error_log($query);
 
 if ($result = $mysqli->query($query)) {
 
