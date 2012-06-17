@@ -38,7 +38,10 @@ $query .= " ORDER BY RAND() LIMIT 0,1;";
 if ($result = $mysqli->query($query)) {
 
     $img = $result->fetch_object();
-    echo json_encode(array("id" => $img->id, "text" => $img->text, "zone" => $img->zone, "path" => htmlentities(getImagePath($img->id))));
+    if ($img)
+    	echo json_encode(array("id" => $img->id, "text" => $img->text, "zone" => $img->zone, "path" => htmlentities(getImagePath($img->id))));
+    else
+    	echo json_encode('done');
 
     /* free result set */
     $result->close();
