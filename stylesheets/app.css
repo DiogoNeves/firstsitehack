@@ -168,7 +168,11 @@ body#sign-up a#done-button.gold {
 margin-top: 0;
 }
 
-body#team-profile  {
+body#team-profile {
+	padding: 0;
+}
+
+body#team-profile, body#image  {
 background-image: url("../images/mobile-plain-no-logo.png");
 background-repeat: repeat;
 position: relative;
@@ -237,7 +241,7 @@ div#app-nav-text a {
 }
 
 div#app-nav-text a.tag, span.entypo a.tag {
-	color: rgba(97,102,164,1);
+	/* color: rgba(97,102,164,1); */
 }
 
 div#info-modal {
@@ -247,6 +251,17 @@ div#info-modal {
 
 div.reveal-modal {
 	padding-top: 3em;
+}
+
+.reveal-modal-bg {
+position: fixed;
+height: 100%;
+width: 100%;
+background: rgba(162,150,95,1);
+z-index: 40;
+display: none;
+top: 0;
+left: 0;
 }
 
 a.close-reveal-modal {
