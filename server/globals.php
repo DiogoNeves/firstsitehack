@@ -7,7 +7,7 @@ $database = 'goldrush';
 
 
 function getImagePath($id, $title) {
-	return "/server/crops/" . $title . '.jpg';
+	return "./server/crops/" . $title . '.jpg';
 }
 
 ?>

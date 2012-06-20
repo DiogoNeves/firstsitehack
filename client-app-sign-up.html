@@ -63,7 +63,7 @@
 						"teamname": teamName
 					};
 
-					$.post('server/signup.php', info, function(data) {
+					$.post('./server/signup.php', info, function(data) {
 						console.log(data);
 					}).error(function (xhr, ajaxOptions, thrownError){
 						console.log(thrownError);
