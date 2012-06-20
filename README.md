@@ -1,11 +1,11 @@
-# Culture Hack East 2012 Hack
+# Goldrush - Culture Hack East 2012 Hack with Firstsite
 
 Using Zurb Foundation CSS framework: http://foundation.zurb.com  
 Using Jcrop jQuery plugin: http://deepliquid.com/content/Jcrop.html  
   
 Icon fonts from http://www.entypo.com/  
   
-# Goldrush
+## Introduction
   
 A treasure hunt game for families created with the support from Firstsite.
   
