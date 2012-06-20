@@ -74,7 +74,7 @@
 		var teamname = 'test';
 
 		$(document).ready(function() {
-			$.getJSON('server/profile.php?teamname=' + teamname, function (data) {
+			$.getJSON('./server/profile.php?teamname=' + teamname, function (data) {
 				console.log(data);
 				$('#score-target').text(data.score);
 				$('#teamname-target').text(teamname);
