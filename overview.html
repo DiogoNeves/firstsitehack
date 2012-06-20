@@ -42,7 +42,7 @@
 				<img src="images/gr-logo.png" alt="logo" width="252" height="68" />
 			</div>
 			<div class="four columns">
-				<a id="add-more-button" href="#" class="large radius button">Add more images</a>
+				<a id="add-more-button" href="./edit.html" class="large radius button">Add more images</a>
 			</div>
 		</div>
 
@@ -197,7 +197,7 @@
 
 		$(document).ready(function() {
 			// Get zones info
-			$.getJSON('server/get_zones.php', function (data) {
+			$.getJSON('./server/get_zones.php', function (data) {
 				console.log(data);
 
 				// go through zones
@@ -231,7 +231,7 @@
 					console.log(i);
 					for (; i < zoneSize; ++i) {
 						var imgId = 'z' + z + '_' + i;
-						$('#' + imgId).attr('src', 'images/no-image.png');
+						$('#' + imgId).attr('src', './images/no-image.png');
 					}
 				}
 			});

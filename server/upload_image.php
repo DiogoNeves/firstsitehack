@@ -22,6 +22,15 @@ if (mysqli_connect_errno()) {
     exit();
 }
 
+$query = "SELECT COUNT(`id`) FROM `images` WHERE `zone` = \"{$zone}\";";
+if ($result = $mysqli->query($query)) {
+	$count = $result->fetch_array();
+	if ($count[0] > 6) {
+		echo json_encode('TOO_MANY');
+		exit();
+	}
+}
+
 //$image = substr($mysqli->real_escape_string($_POST['image']), 0, 10);
 $image = $mysqli->real_escape_string($_POST['image']);
 
