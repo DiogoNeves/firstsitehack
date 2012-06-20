@@ -30,7 +30,7 @@ if ($result = $mysqli->query($query)) {
     /* free result set */
     $result->close();
 
-    echo json_encode($zones, JSON_FORCE_OBJECT);
+    echo json_encode($zones);
 }
 
 $mysqli->close();

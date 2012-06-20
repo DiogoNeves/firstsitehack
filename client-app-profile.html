@@ -36,16 +36,16 @@
 	
 	<div id="team-info" class="row">
 			<div class="phone-one three columns">
-				<img src="images/gr-logo-mob.png" alt="logo" />
+				<img src="./images/gr-logo-mob.png" alt="logo" />
 			</div>
 			<div class="phone-three three columns">
-				<h1 class="white-shadow">Team Name here</h1>
+				<h1 id="teamname-target" class="white-shadow">Team Name here</h1>
 				<span id="score" class="white-shadow">Current score: <strong id="score-target" class="gold round label">11</strong></span>
 			</div>
 		</div>
 	<div class="row">
 		<div id="back-to-game" class="phone-four columns">
-			<a id="done-button" href="client-app-image.html" class="large radius gold button">Back to the game</a>
+			<a id="done-button" href="./client-app-image.html" class="large radius gold button">Back to the game</a>
 		</div>
 	</div>
 
@@ -77,6 +77,7 @@
 			$.getJSON('server/profile.php?teamname=' + teamname, function (data) {
 				console.log(data);
 				$('#score-target').text(data.score);
+				$('#teamname-target').text(teamname);
 
 				for (i in data.images) {
 					var image = data.images[i];
